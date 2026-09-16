@@ -84,16 +84,28 @@ ALL_CARES = FR.ALL_CARES
 
 FAMILIES = copy.deepcopy(FR.FAMILIES)
 _EN_FAM = {
-    "prevenir": dict(name="Prevent", line="Check-ups, hygiene and gum health.",
+    "prevenir": dict(name="Prevent", h1="Check-ups, dental hygiene and gums",
+                     seo_title="Preventive Dentistry in Meyrin | Check-ups", 
+                     seo_desc="Dental check-up, hygienist appointment, scaling, gum care and children's follow-up at the Meyrin dental practice. What each appointment actually checks.",
+                     line="Check-ups, dental hygiene and gum health.",
                      intro="The check-up spots what does not hurt yet, the hygiene appointment removes what brushing cannot, and gum follow-up stops an inflammation from settling in. Children are seen for a first check-up at their own pace.",
                      alt="Child during a check-up, reassured by the dentist"),
-    "soigner": dict(name="Treat", line="Cavities, root canal treatments and conservative care.",
+    "soigner": dict(name="Treat", h1="Cavities, root canals and extractions",
+                    seo_title="Dental Treatments in Meyrin | Cavities, Root Canal",
+                    seo_desc="Cavity, root canal, extraction, wisdom tooth, oral surgery and dental emergency at the Meyrin practice, once the examination is done.",
+                    line="Cavities, root canal treatments and conservative care.",
                     intro="An affected tooth is examined before it is treated. Depending on what the examination shows, care ranges from a filling to a root canal treatment, and oral surgery takes over for an extraction or a wisdom tooth. Pain that cannot wait is seen as an emergency.",
                     alt="Examination of a patient by the dentist"),
-    "restaurer": dict(name="Restore", line="Crowns, prostheses and implants.",
+    "restaurer": dict(name="Restore", h1="Crowns, bridges and dental implants",
+                      seo_title="Crown, Bridge and Dental Implant in Meyrin",
+                      seo_desc="Crown, bridge, dental implant and replacing several teeth in Meyrin. The practice's own oral surgeon places the implants on site.",
+                      line="Crowns, bridges and dental implants.",
                       intro="A badly damaged tooth can be protected by a crown, a missing tooth replaced by an implant or a bridge. The practice's oral surgeon places implants on site, and the choice between solutions is explained before any decision.",
                       alt="Close-up of a mirror examination"),
-    "harmoniser": dict(name="Enhance the smile", line="Cosmetic dentistry, whitening and veneers.",
+    "harmoniser": dict(name="Enhance the smile", h1="Teeth whitening and veneers",
+                       seo_title="Cosmetic Dentistry in Meyrin | Whitening, Veneers",
+                       seo_desc="Teeth whitening and veneers at the Meyrin dental practice, always after an assessment of the teeth and gums. Limits explained first.",
+                       line="Cosmetic dentistry, whitening and veneers.",
                        intro="Whitening acts on the shade of natural teeth, veneers correct a shape or a colour. An assessment of the teeth and gums always comes before the decision, because the result depends on what the examination shows.",
                        alt="Smiling patient at the end of an appointment"),
 }
@@ -139,11 +151,11 @@ VISIT_STEPS = [
 
 TRUST = [
     ("Explaining before acting", "Every observation is explained and every step is announced. You know what is going to be done before it starts."),
-    ("One team, from check-up to implant", "General dentistry, oral surgery, implantology and dental hygiene are all carried out on site by the practice team whenever possible."),
-    ("X-rays when they are useful", "They are suggested when they add information the examination alone does not give, and the reason is explained."),
-    ("Access without steps", "The Meyrin practice is on the first floor with no steps to climb. If you have a specific need, call before your appointment."),
-    ("Six languages spoken", "French, English, German, Italian, Spanish and Portuguese, depending on who receives you."),
-    ("Emergencies during opening hours", "Call " + PHONE + " and describe what is happening. The team tells you when to come."),
+    ("Complete care, from the check-up to the implant", "General dentistry, oral surgery, implantology and dental hygiene are all carried out on site by the practice team whenever possible. You are not referred to a second address mid-treatment."),
+    ("X-rays only when they are useful", "They are suggested when they add information the clinical examination alone does not give, and the reason is explained before the image is taken."),
+    ("Step-free access", "The Meyrin practice is on the first floor of a building with no steps to climb, at the Meyrin, Hôpital de la Tour stop. If you have a specific need, say so when you book."),
+    ("Six languages at the chair", "French, English, German, Italian, Spanish and Portuguese, depending on who receives you. Each profile says which ones."),
+    ("Dental emergencies during opening hours", "Call " + PHONE + " and describe what is happening, since when and how it is changing. The team tells you when to come."),
 ]
 
 PRACTICE = dict(
@@ -177,18 +189,18 @@ CONTACT_FAQ = [
 ]
 
 META = dict(
-    home=("Dentist in Meyrin and Nyon | Cabinet Dentaire", "Dental practice in Meyrin, Place de la Diversité 1, and in Nyon. Check-ups, hygiene, treatments, implants and cosmetic dentistry by one team. Book online or call 022 320 19 19."),
-    soins=("Dental treatments in Meyrin and Nyon | Prevent, treat, restore, enhance", "All the treatments of Cabinet Dentaire, organised around your need: check-up, hygiene, cavities, root canals, implants, crowns, whitening and emergencies."),
-    equipe=("The team | Cabinet Dentaire Meyrin and Nyon", "Two dentists, an oral surgeon, a dental hygienist and two assistants. Each profile says what the person does and in which languages."),
-    visite=("What happens at a first appointment | Cabinet Dentaire", "From booking to decision: arrival, documents, examination, X-rays if needed, explanation, options and estimate. What to expect, step by step."),
-    cabinet=("The practice | Cabinet Dentaire Meyrin", "Treatment rooms, sterilisation, step-free access and the way of working at Cabinet Dentaire Meyrin, Place de la Diversité 1."),
-    urgences=("Dental emergency in Meyrin | Cabinet Dentaire", "Pain, broken tooth, swelling or injury: call 022 320 19 19 Monday to Friday, 8am to 6.30pm. What to do while you wait and when to call 144."),
-    contact=("Contact and access | Cabinet Dentaire Meyrin and Nyon", "Place de la Diversité 1, 1217 Meyrin, first floor with no steps. Tram 18, buses 56, 57, 68, 71 and A3, Meyrin, Hôpital de la Tour stop. Phone 022 320 19 19."),
-    cabinets=("Our practices, Meyrin and Nyon | Cabinet Dentaire", "Two practices, one team. Meyrin, Place de la Diversité 1, and Nyon. Address, hours, access and booking for each practice."),
-    meyrin=("Cabinet Dentaire Meyrin, Place de la Diversité 1", "The Meyrin practice: address, hours, access by tram 18 and bus, Parking des Sports, team and booking. First floor, no steps."),
-    nyon=("Cabinet Dentaire Nyon | Details to come", "The Nyon practice. Practical details will be published as soon as the practice confirms them. Book online or call 022 320 19 19."),
-    blog=("The practice blog | Understanding dental care", "Articles from Cabinet Dentaire Meyrin and Nyon to understand dental care: prevention, wisdom teeth, whitening, children. No jargon, no promises."),
-    formulaire=("Patient form | Cabinet Dentaire", "Fill in your details before your first appointment, at your own pace: identity, insurance, contact. Optional, stored on your device only until you send or print it."),
+    home=("Dental Practice in Meyrin and Nyon | Our Approach", "Two dental practices, one English-speaking team: check-ups, hygiene, cavities, implants and emergencies. We examine and explain, you decide. 022 320 19 19."),
+    soins=("Dental Treatments in Meyrin | Check-up to Implant", "Check-up, scaling, cavity, root canal, extraction, crown, implant, whitening and dental emergency, all provided at the Meyrin practice by a single team."),
+    equipe=("Dentists and Hygienist in Meyrin | Our Team", "Two dentists, an oral surgeon, a dental hygienist and two assistants in Meyrin. Each profile says what the person provides and in which languages they work."),
+    visite=("First Dental Appointment in Meyrin | What Happens", "What happens at a first dental appointment in Meyrin: arrival, documents to bring, examination, X-rays, explanation, options and the written estimate."),
+    cabinet=("The Meyrin Dental Practice | Rooms and Access", "Treatment rooms, sterilisation, step-free access and the way of working at the Meyrin dental practice, Place de la Diversité 1, in Meyrin."),
+    urgences=("Dental Emergency in Meyrin | What to Do and Who to Call", "Pain, broken tooth or swelling in Meyrin: call 022 320 19 19, Monday to Friday, 8am to 6.30pm. What to do while you wait for your appointment."),
+    contact=("Contact the Meyrin Dental Practice | Access", "Place de la Diversité 1, 1217 Meyrin, first floor with no steps. Tram 18, buses 56, 57, 68, 71 and A3, Meyrin, Hôpital de la Tour stop. Phone 022 320 19 19."),
+    cabinets=("Dental Practices in Meyrin and Nyon | Addresses", "Two dental practices, one team. Meyrin, Place de la Diversité 1, and Nyon. Address, opening hours, access and booking for each of them."),
+    meyrin=("English-Speaking Dentist in Meyrin | Access, Hours", "English-speaking dentist in Meyrin, Place de la Diversité 1: opening hours, access by tram 18 and by bus, Parking des Sports, the team and booking."),
+    nyon=("English-Speaking Dentist in Nyon | Details to Come", "English-speaking dentist in Nyon, the group's second practice. Practical details will be published as soon as the practice confirms them. Call 022 320 19 19."),
+    blog=("Understanding Dental Care | The Practice Blog", "Prevention, wisdom teeth, whitening, children's care: what we explain at the chair, written to be read at home. No jargon and no promise of a result."),
+    formulaire=("Online Patient Form | Meyrin Dental Practice", "Fill in your identity, your insurance and your contact details before the first appointment. Optional, and kept on your device until you send it."),
 )
 
 LOCATIONS = copy.deepcopy(FR.LOCATIONS)

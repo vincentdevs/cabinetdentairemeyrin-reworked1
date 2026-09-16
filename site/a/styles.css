@@ -470,7 +470,7 @@ section { padding: var(--band) 0; }
 .hero-float b { text-wrap: balance; }
 .map-sec { padding: 0 0 var(--band); }
 @media (max-width: 900px) { .hero-float { padding: 24px; } }
-.hero-txt h1 { font-size: clamp(30px, 4.2vw, 58px); }
+.hero-txt h1 { font-size: clamp(33px, 4.62vw, 64px); }
 
 /* --- round 3: chooser, quick actions, search, language, logo, discs, video, form --- */
 .mark img { height: 52px; width: auto; display: block; }

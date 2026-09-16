@@ -137,21 +137,33 @@ CARE_IMG = {
 # Treatments organised around what the patient needs, not around specialities.
 FAMILIES = [
     dict(slug="prevenir", name="Prévenir", tone="mint", ill="toothbrush",
-         line="Contrôles, hygiène et santé des gencives.",
+         h1="Contrôles, hygiène dentaire et gencives",
+         seo_title="Prévention dentaire à Meyrin | Contrôle et hygiène",
+         seo_desc="Contrôle dentaire, rendez-vous chez l’hygiéniste, détartrage, soins des gencives et suivi des enfants au cabinet dentaire de Meyrin.",
+         line="Contrôles, hygiène dentaire et santé des gencives.",
          intro="Le contrôle repère ce qui ne fait pas encore mal, le rendez-vous d’hygiène retire ce que le brossage ne retire pas, et le suivi des gencives évite qu’une inflammation s’installe. Les enfants sont reçus pour un premier contrôle à leur rythme.",
          cares=["controle-dentaire-meyrin", "hygieniste-dentaire-meyrin", "detartrage-meyrin", "soins-gencives-meyrin", "dentiste-enfant-meyrin"],
          who=["victor-palmen", "cilien-prieu", "juliana"], img="stock/enfant-controle.jpg", alt="Enfant pendant un contrôle, rassuré par la dentiste"),
     dict(slug="soigner", name="Soigner", tone="turquoise", ill="tooth",
+         h1="Caries, traitements de racine et extractions",
+         seo_title="Soins dentaires à Meyrin | Carie et traitement de racine",
+         seo_desc="Carie, traitement de racine, extraction, dent de sagesse, chirurgie orale et urgence dentaire au cabinet dentaire de Meyrin, après examen.",
          line="Caries, traitements de racine et soins conservateurs.",
          intro="Une dent atteinte est examinée avant d’être traitée. Selon ce que montre l’examen, le soin va de l’obturation au traitement de racine, et la chirurgie orale prend le relais pour une extraction ou une dent de sagesse. Une douleur qui ne peut pas attendre est reçue en urgence.",
          cares=["carie-dentaire-meyrin", "traitement-racine-meyrin", "extraction-dentaire-meyrin", "dents-sagesse-meyrin", "chirurgie-orale-meyrin", "urgence-dentaire-meyrin"],
          who=["victor-palmen", "cilien-prieu", "edouard-di-donna"], img="stock/examen-dentiste.jpg", alt="Examen d’une patiente par la dentiste"),
     dict(slug="restaurer", name="Restaurer", tone="cobalt", ill="implant",
-         line="Couronnes, prothèses et implants.",
+         h1="Couronnes, bridges et implants dentaires",
+         seo_title="Couronne, bridge et implant dentaire à Meyrin",
+         seo_desc="Couronne, bridge, implant dentaire et remplacement de plusieurs dents à Meyrin. Le chirurgien oral du cabinet pose les implants sur place.",
+         line="Couronnes, bridges et implants dentaires.",
          intro="Une dent très abîmée peut être protégée par une couronne, une dent manquante remplacée par un implant ou un bridge. Le chirurgien oral du cabinet pose les implants sur place, et le choix entre les solutions est expliqué avant de décider.",
          cares=["couronne-dentaire-meyrin", "implant-dentaire-meyrin", "implant-ou-bridge", "dent-manquante", "remplacer-plusieurs-dents"],
          who=["edouard-di-donna", "victor-palmen", "cilien-prieu"], img="stock/examen-proche.jpg", alt="Examen au miroir, gros plan"),
     dict(slug="harmoniser", name="Harmoniser", tone="pink", ill="braces",
+         h1="Blanchiment et facettes dentaires",
+         seo_title="Esthétique dentaire à Meyrin | Blanchiment, facettes",
+         seo_desc="Blanchiment dentaire et facettes au cabinet dentaire de Meyrin, toujours après un bilan des dents et des gencives. Limites expliquées.",
          line="Esthétique dentaire, blanchiment et facettes.",
          intro="Le blanchiment agit sur la teinte des dents naturelles, les facettes corrigent une forme ou une couleur. Un bilan des dents et des gencives précède toujours la décision, parce que le résultat dépend de ce que l’examen montre.",
          cares=["blanchiment-dentaire-meyrin", "facettes-dentaires-meyrin", "esthetique-dentaire-meyrin"],
@@ -223,11 +235,11 @@ VISIT_STEPS = [
 # ------------------------------------------------------------------ trust
 TRUST = [
     ("Expliquer avant d’intervenir", "Chaque observation est expliquée et chaque geste est annoncé. Vous savez ce qui va être fait avant que cela commence."),
-    ("Une seule équipe, du contrôle à l’implant", "Médecine dentaire générale, chirurgie orale, implantologie et hygiène dentaire sont pratiquées sur place, par l’équipe du cabinet, chaque fois que cela est possible."),
-    ("Des radiographies quand elles sont utiles", "Elles sont proposées lorsqu’elles apportent une information que l’examen seul ne donne pas, et la raison vous est expliquée."),
-    ("Un accès sans marche", "Le cabinet est au premier étage, sans marche à franchir. Si vous avez un besoin précis, appelez avant le rendez-vous."),
-    ("Six langues parlées", "Français, anglais, allemand, italien, espagnol et portugais, selon la personne qui vous reçoit."),
-    ("Les urgences pendant les heures d’ouverture", "Appelez le " + PHONE + " et décrivez ce qui se passe. L’équipe vous dit quand venir."),
+    ("Une prise en charge complète, du contrôle à l’implant", "Omnipratique, chirurgie orale, implantologie et hygiène dentaire sont pratiquées sur place par l’équipe du cabinet, chaque fois que cela est possible. Vous n’êtes pas adressé à une seconde adresse en cours de traitement."),
+    ("Des radiographies seulement quand elles sont utiles", "Elles sont proposées lorsqu’elles apportent une information que l’examen clinique seul ne donne pas, et la raison vous est expliquée avant le cliché."),
+    ("Un accès de plain-pied, sans marche", "Le cabinet est au premier étage d’un immeuble sans marche à franchir, à l’arrêt Meyrin, Hôpital de la Tour. Si vous avez un besoin précis, dites-le en réservant."),
+    ("Six langues au fauteuil", "Français, anglais, allemand, italien, espagnol et portugais, selon la personne qui vous reçoit. Le profil de chacun indique lesquelles."),
+    ("Les urgences dentaires pendant les heures d’ouverture", "Appelez le " + PHONE + " et décrivez ce qui se passe, depuis quand et comment cela évolue. L’équipe vous dit quand venir."),
 ]
 
 # ------------------------------------------------------------------ practice page
@@ -275,13 +287,13 @@ CONTACT_FAQ = [
 
 # ------------------------------------------------------------------ seo
 META = dict(
-    home=("Dentiste à Meyrin | Cabinet Dentaire Meyrin", "Cabinet dentaire à Meyrin, Place de la Diversité 1. Contrôles, hygiène, soins, implants et esthétique par une seule équipe. Rendez-vous en ligne ou au 022 320 19 19."),
-    soins=("Soins dentaires à Meyrin | Prévenir, soigner, restaurer, harmoniser", "Tous les soins du Cabinet Dentaire Meyrin, organisés selon votre besoin : contrôle, hygiène, caries, traitements de racine, implants, couronnes, blanchiment et urgences."),
-    equipe=("L’équipe du Cabinet Dentaire Meyrin", "Deux médecins-dentistes, un chirurgien oral, une hygiéniste dentaire et deux assistantes. Chaque profil dit ce que la personne pratique et dans quelles langues."),
-    visite=("Comment se passe un premier rendez-vous | Cabinet Dentaire Meyrin", "De la prise de rendez-vous à la décision : arrivée, documents, examen, radiographies si nécessaires, explication, options et devis. Ce qui vous attend, étape par étape."),
-    cabinet=("Le cabinet | Cabinet Dentaire Meyrin", "Les salles de soins, la stérilisation, l’accès sans marche et la façon de travailler du Cabinet Dentaire Meyrin, Place de la Diversité 1."),
-    urgences=("Urgence dentaire à Meyrin | Cabinet Dentaire Meyrin", "Douleur, dent cassée, gonflement ou traumatisme : appelez le 022 320 19 19 du lundi au vendredi, 8h à 18h30. Que faire en attendant et quand appeler le 144."),
-    contact=("Contact et accès | Cabinet Dentaire Meyrin", "Place de la Diversité 1, 1217 Meyrin, 1er étage sans marche. Tram 18, bus 56, 57, 68, 71 et A3, arrêt Meyrin, Hôpital de la Tour. Téléphone 022 320 19 19."),
+    home=("Cabinet dentaire à Meyrin et à Nyon | Dentiste", "Deux cabinets dentaires, une seule équipe : contrôle, hygiène, caries, implants et urgences. Nous examinons et nous expliquons, vous décidez. 022 320 19 19."),
+    soins=("Soins dentaires à Meyrin | Du contrôle à l’implant", "Contrôle, détartrage, carie, traitement de racine, extraction, couronne, implant et blanchiment, pratiqués au cabinet de Meyrin par une seule équipe."),
+    equipe=("Médecins-dentistes et hygiéniste à Meyrin | L’équipe", "Deux médecins-dentistes, un chirurgien oral, une hygiéniste dentaire et deux assistantes à Meyrin. Chaque profil dit ce que la personne pratique."),
+    visite=("Premier rendez-vous chez le dentiste | Déroulement", "Le déroulement d’un premier rendez-vous chez le dentiste à Meyrin : arrivée, documents, examen, radiographies, explication, options et devis."),
+    cabinet=("Le cabinet dentaire de Meyrin | Salles et accès", "Les salles de soins, la stérilisation, l’accès sans marche et la façon de travailler du cabinet dentaire de Meyrin, Place de la Diversité 1."),
+    urgences=("Urgence dentaire à Meyrin | Que faire et qui appeler", "Douleur, dent cassée ou gonflement à Meyrin : appelez le 022 320 19 19, du lundi au vendredi de 8h à 18h30. Que faire en attendant le rendez-vous."),
+    contact=("Contacter le cabinet dentaire de Meyrin | Accès", "Place de la Diversité 1, 1217 Meyrin, 1er étage sans marche. Tram 18, bus 56, 57, 68, 71 et A3, arrêt Meyrin, Hôpital de la Tour. Téléphone 022 320 19 19."),
 )
 
 
@@ -333,14 +345,14 @@ BLOG = json.load(open(HERE / "content" / "blog-fr.json", encoding="utf-8"))
 PRACTICAL = dict(
     h="En pratique",
     items=[
-        ("Rendez-vous", "Réservez en ligne ou au " + PHONE + ". Vous n’avez pas besoin de connaître le nom du soin, dites ce qui vous amène. Durée du rendez-vous : [DURÉE À CONFIRMER]."),
-        ("Devis et financement", "En Suisse, la plupart des soins dentaires ne sont pas pris en charge par l’assurance de base (LAMal). Lorsqu’un traitement est proposé, un devis écrit vous est remis avant de commencer. [MODALITÉS DE PAIEMENT ET DE FACTURATION À CONFIRMER]"),
-        ("Accident", "Si le soin fait suite à un accident, il est annoncé à votre assurance accident (LAA) ou à votre assurance maladie. Signalez-le à la réservation, l’équipe vous explique la déclaration."),
+        ("Rendez-vous", "Réservez en ligne ou au " + PHONE + ". Vous n’avez pas besoin de connaître le nom du soin, dites simplement ce qui vous amène et l’équipe vous oriente. Durée du rendez-vous : [DURÉE À CONFIRMER]."),
+        ("Devis et prise en charge", "En Suisse, la plupart des soins dentaires ne sont pas pris en charge par l’assurance de base (LAMal). Lorsqu’un traitement est proposé, un devis écrit détaillant les actes prévus vous est remis avant que quoi que ce soit commence. [MODALITÉS DE PAIEMENT ET DE FACTURATION À CONFIRMER]"),
+        ("Accident", "Si le soin fait suite à un accident, il est annoncé à votre assurance accident (LAA) ou, à défaut, à votre assurance maladie. Signalez-le en réservant, l’équipe vous explique la déclaration."),
         ("Où", "Le soin est pratiqué au cabinet de Meyrin. Pour Nyon, les soins pris en charge restent à confirmer. [À CONFIRMER]"),
     ],
 )
-META["blog"] = ("Le blog du cabinet | Comprendre les soins dentaires", "Articles du Cabinet Dentaire Meyrin et Nyon pour comprendre les soins dentaires : prévention, dents de sagesse, blanchiment, enfants. Sans jargon, sans promesse.")
-META["cabinets"] = ("Nos cabinets, Meyrin et Nyon | Cabinet Dentaire", "Deux cabinets, une seule équipe. Meyrin, Place de la Diversité 1, et Nyon. Adresse, horaires, accès et prise de rendez-vous pour chaque cabinet.")
-META["meyrin"] = ("Cabinet Dentaire Meyrin, Place de la Diversité 1", "Le cabinet de Meyrin : adresse, horaires, accès en tram 18 et bus, parking des Sports, équipe et prise de rendez-vous. 1er étage sans marche.")
-META["nyon"] = ("Cabinet Dentaire Nyon | Informations à venir", "Le cabinet de Nyon. Les informations pratiques seront publiées dès que le cabinet les aura confirmées. Rendez-vous en ligne ou au 022 320 19 19.")
-META["formulaire"] = ("Formulaire patient | Cabinet Dentaire", "Remplissez vos informations avant votre premier rendez-vous, à votre rythme : identité, assurance, coordonnées. Facultatif, conservé sur votre appareil jusqu’à l’envoi ou l’impression.")
+META["blog"] = ("Comprendre les soins dentaires | Le blog du cabinet", "Prévention, dents de sagesse, blanchiment, soins des enfants : ce que nous expliquons au fauteuil, écrit pour être lu chez vous. Sans promesse de résultat.")
+META["cabinets"] = ("Cabinets dentaires à Meyrin et à Nyon | Nos adresses", "Deux cabinets dentaires, une seule équipe. Meyrin, Place de la Diversité 1, et Nyon. Adresse, horaires, accès et prise de rendez-vous pour chaque cabinet.")
+META["meyrin"] = ("Dentiste à Meyrin | Cabinet dentaire et urgences", "Dentiste à Meyrin, Place de la Diversité 1 : horaires, accès en tram 18 et en bus, parking des Sports, équipe et rendez-vous. 1er étage, sans marche.")
+META["nyon"] = ("Dentiste à Nyon | Cabinet dentaire, infos à venir", "Dentiste à Nyon, le second cabinet du groupe. Les informations pratiques seront publiées dès que le cabinet les aura confirmées. Rendez-vous au 022 320 19 19.")
+META["formulaire"] = ("Formulaire patient en ligne | Cabinet Dentaire Meyrin", "Renseignez votre identité, votre assurance et vos coordonnées avant le premier rendez-vous. Facultatif, et conservé sur votre appareil jusqu’à l’envoi.")

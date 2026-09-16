@@ -21,6 +21,28 @@ FR_PUNCT = re.compile(r" ([?!:;])")
 def fr_typo(html):
     return FR_PUNCT.sub(" \\1", html)
 
+BRAND_TAILS = (" | Cabinet Dentaire Meyrin", " | Cabinet Dentaire")
+
+
+def suffix(title):
+    """Append the longest practice name that still fits the 60-character SERP width."""
+    for tail in BRAND_TAILS:
+        if len(title + tail) <= 60:
+            return title + tail
+    return title
+
+
+def fit(base, *extras):
+    """Grow a meta description towards the 120-160 band, one clause at a time."""
+    out = base
+    for e in extras:
+        if len(out) >= 120:
+            break
+        if len(out + " " + e) <= 160:
+            out += " " + e
+    return out
+
+
 HERE = pathlib.Path(__file__).parent
 
 THEMES = {
@@ -33,13 +55,13 @@ LANGS = {"fr": FR, "en": EN}
 S = {
     "fr": dict(
         nav_all="Tous les soins", nav_cabs="Les deux cabinets", contact_loc="Contacter le cabinet de", form_loc="Formulaire pour ce cabinet",
-        about_k="Le cabinet", about_h="Un cabinet qui explique avant d’agir", about_p="Médecine dentaire générale, chirurgie orale, implantologie et hygiène dentaire, réunies dans une seule équipe. Chaque soin est précédé d’un examen, expliqué avec des mots simples, et décidé par la personne dans le fauteuil.",
+        about_k="Le cabinet dentaire", about_h="Toute la médecine dentaire dans une équipe", about_p="Omnipratique, chirurgie orale, implantologie et hygiène dentaire, réunies dans une seule équipe. Chaque soin suit un examen, s’explique avec des mots simples, et se décide avec la personne assise dans le fauteuil.",
         about_team="L’équipe en résumé", about_diff="Ce qui nous distingue", about_more="Découvrir l’équipe",
-        team_home_label="L’équipe", team_home_h="Nous sommes là pour vous accueillir", team_home_p="Deux médecins-dentistes, un chirurgien oral, une hygiéniste et deux assistantes. Une équipe stable, que vous retrouvez d’un rendez-vous à l’autre.", team_home_more="Voir toute l’équipe",
+        team_home_label="L’équipe", team_home_h="Les médecins-dentistes qui vous reçoivent", team_home_p="Deux médecins-dentistes, un chirurgien oral, une hygiéniste dentaire et deux assistantes. Une équipe stable, que vous retrouvez d’un rendez-vous à l’autre.", team_home_more="Voir toute l’équipe",
         hero_people="Victor et Edouard vous reçoivent",
-        soins_home_h="Nos soins", soins_home_p="Chaque famille de soins a sa section ci-dessous, avec la liste de ce que nous pratiquons. Chaque soin a ensuite sa page, avec le déroulement, les questions fréquentes et les informations pratiques.",
-        all_of="Voir la famille", blog_h="Le blog", blog_p="Des articles pour comprendre les soins dentaires avant de venir, sans jargon et sans promesse.", blog_all="Tous les articles", blog_read="Lire l’article",
-        blog_lead="Ce que nous expliquons au fauteuil, écrit pour être lu chez vous : prévention, dents de sagesse, blanchiment, enfants. Les articles s’ajouteront au fil des questions que vous nous posez.",
+        soins_home_h="Nos soins dentaires, du contrôle à l’implant", soins_home_p="Quatre familles de soins, chacune avec la liste de ce que nous pratiquons à Meyrin. Chaque soin a ensuite sa page : ce que le praticien vérifie, le déroulement, les questions fréquentes et les informations pratiques.",
+        all_of="Voir la famille", blog_h="Comprendre les soins dentaires", blog_p="Des articles pour comprendre un soin avant de venir, sans jargon et sans promesse de résultat.", blog_all="Tous les articles", blog_read="Lire l’article",
+        blog_lead="Ce que nous expliquons au fauteuil, écrit pour être lu chez vous : prévention, dents de sagesse, blanchiment, soins des enfants. Les articles s’ajouteront au fil des questions que vous nous posez.",
         cab_soins="Les soins pratiqués à", cab_contact="Contacter le cabinet de", cab_contact_p="Par téléphone pendant les heures d’ouverture, par courriel pour ce qui peut attendre, ou en ligne pour réserver.",
         f_cab_opt="Cabinet (facultatif)", f_cab_none="Je ne sais pas encore",
         lang="fr-CH", other="en", other_label="English", book="Prendre rendez-vous", book_online="Prendre rendez-vous en ligne", call="Appeler le cabinet",
@@ -49,38 +71,38 @@ S = {
         quick="Accès rapides", call_short="Appeler", choose="Choisir un cabinet", form="Formulaire patient", emergency="Urgences", see_loc="Voir le cabinet de",
         home="Accueil", crumbs="Fil d’Ariane", who_cares="Qui pratique ce soin", who_cares_pl="Qui pratique ces soins", same_family="Dans la même famille",
         others="Les autres familles de soins", faq="Questions fréquentes", team_intro="Deux médecins-dentistes, un chirurgien oral, une hygiéniste dentaire et deux assistantes. Chaque profil dit ce que la personne pratique et dans quelles langues.",
-        team_h="Les personnes qui vous reçoivent", team_lead="Deux médecins-dentistes, un chirurgien oral, une hygiéniste dentaire et deux assistantes. Vous n’avez pas à choisir vous-même : indiquez le motif du rendez-vous et l’équipe vous oriente vers la personne qui pratique ce soin.",
+        team_h="L’équipe du cabinet dentaire de Meyrin", team_lead="Deux médecins-dentistes, un chirurgien oral, une hygiéniste dentaire et deux assistantes. Vous n’avez pas à choisir vous-même : indiquez le motif du rendez-vous et l’équipe vous oriente vers la personne qui pratique ce soin.",
         areas="Domaines", langs="Langues", practice="Cabinet", cares_of="Les soins pratiqués", source="Source : présentation officielle du cabinet, mise à jour le",
-        visit_h="Comment se passe un premier rendez-vous", visit_lead="Beaucoup de personnes repoussent un rendez-vous parce qu’elles ne savent pas ce qui les attend. Voici la visite, étape par étape, de la réservation à la décision. Rien n’est décidé à votre place.",
+        visit_h="Un premier rendez-vous chez le dentiste", visit_lead="Beaucoup de personnes repoussent un rendez-vous parce qu’elles ne savent pas ce qui les attend. Voici la consultation étape par étape, de la réservation au devis. Rien n’est décidé à votre place.",
         bring="À apporter", bring_items=["Une pièce d’identité", "La liste de vos médicaments, si vous en prenez", "Vos radiographies récentes, si vous en avez", "Le nom de votre assurance complémentaire dentaire, si vous en avez une"],
         bring_note="Si vous n’avez rien de tout cela, venez quand même.", fill_form="Gagnez du temps à l’accueil : remplissez le formulaire patient en ligne, à votre rythme.",
         calm="Vous pouvez demander une pause, une explication ou un temps de réflexion à n’importe quel moment.", calm_p="Une appréhension se dit au téléphone ou en arrivant, sans justification. Le rendez-vous avance à votre rythme, et un premier contrôle peut très bien se terminer sans aucun soin.",
         all_steps="Toutes les étapes, de la réservation au devis", meet="Rencontrer l’équipe",
-        hero_kicker="Cabinet dentaire, Meyrin et Nyon", hero_a="Le cabinet qui prend le temps", hero_b="Le cabinet qui prend le temps",
-        hero_lead="Contrôles, hygiène, caries, implants ou esthétique dentaire : une seule équipe s’occupe de vous, dans nos deux cabinets. Nous commençons toujours par regarder et expliquer, puis c’est vous qui décidez de la suite.",
+        hero_kicker="Cabinet dentaire à Meyrin, canton de Genève, et à Nyon", hero_a="Le cabinet qui prend le temps", hero_b="Le cabinet qui prend le temps",
+        hero_lead="Un rendez-vous commence par une conversation, pas par un soin. Nous examinons, nous expliquons ce que nous voyons, et vous décidez ensuite. Six personnes vous suivent, à Meyrin, dans le canton de Genève, et à Nyon.",
         hero_alt="Victor Palmen et Edouard Di Donna, les deux médecins du cabinet",
-        locs_h="Deux cabinets, une seule équipe", locs_p="Choisissez le cabinet le plus proche de chez vous. Chaque cabinet a sa page avec son adresse, ses horaires, son accès et son équipe.",
+        locs_h="Deux cabinets dentaires, une seule équipe", locs_p="Choisissez le cabinet le plus proche de chez vous. Chaque page donne l’adresse, les horaires, l’accès en transports et l’équipe qui y consulte.",
         illus="Photo d’illustration", philo="On commence par regarder, comprendre et expliquer. Le traitement vient ensuite.",
         philo_p="Cette façon de travailler tient en trois habitudes : examiner avant de proposer, expliquer avant d’intervenir, et laisser la décision à la personne qui est dans le fauteuil. Elle vaut pour un contrôle comme pour un implant.",
         soins_h="Les soins, organisés selon votre besoin", soins_p="Quatre familles plutôt qu’une liste de spécialités. Chaque page dit ce que le praticien vérifie, comment le soin se déroule et ce que vous pourrez décider après l’examen.",
-        cont_h="Une seule équipe couvre toute la gamme", cont_p="Du contrôle annuel à la pose d’implant, les soins sont réalisés par l’équipe du cabinet chaque fois que cela est possible. Vous n’êtes pas envoyé à une seconde adresse en cours de traitement, et la personne qui vous a examiné sait ce qui a été fait.",
-        trust_h="Ce que vous pouvez attendre du cabinet", close_h="Besoin d’un rendez-vous ?", close_p="Réservez en ligne à toute heure ou appelez pendant les heures d’ouverture. Vous n’avez pas besoin de connaître le nom du soin, dites simplement ce qui vous amène.",
+        cont_h="Une seule équipe, du contrôle à la pose d’implant", cont_p="Du contrôle annuel à la pose d’implant, les soins sont réalisés par l’équipe du cabinet chaque fois que cela est possible. Vous n’êtes pas adressé à une seconde adresse en cours de traitement, et la personne qui vous a examiné sait ce qui a été fait.",
+        trust_h="Ce que vous pouvez attendre du cabinet", close_h="Prendre rendez-vous, à Meyrin ou à Nyon", close_p="Réservez dans l’agenda en ligne à toute heure, ou appelez pendant les heures d’ouverture. Vous n’avez pas besoin de connaître le nom du soin, dites simplement ce qui vous amène.",
         close_care_h="Vous avez une question sur ce soin ?", close_care_p="Le rendez-vous sert à examiner votre situation et à vous expliquer ce qui est possible. Vous décidez ensuite.",
         close_person_h="Prendre rendez-vous", close_person_p="Lors de la réservation, dites-nous simplement ce qui vous amène. L’équipe vous oriente vers la personne qui pratique ce soin.",
-        soins_lead="Chaque page dit ce que le praticien vérifie, comment le soin se déroule et ce que vous pourrez décider après l’examen. Vous n’avez pas besoin de connaître le nom du soin pour prendre rendez-vous.",
-        soins_title="Les soins, expliqués avant d’être décidés", by="Pratiqué par", pending_team="Le cabinet n’a pas encore précisé qui consulte à Nyon ni les soins qui y sont pris en charge. [ÉQUIPE DE NYON À CONFIRMER]",
-        cabinets_h="Nos cabinets", cabinets_lead="Deux adresses, une seule façon de travailler. Choisissez le cabinet le plus proche, la prise de rendez-vous et le téléphone sont communs.",
+        soins_lead="Quatre familles de soins plutôt qu’une liste de spécialités, parce que vous arrivez avec un besoin et non avec un diagnostic. Chaque page dit ce que le praticien vérifie, comment le soin se déroule et ce que vous pourrez décider après l’examen. Vous n’avez pas besoin de connaître le nom du soin pour prendre rendez-vous.",
+        soins_title="Les soins dentaires pratiqués à Meyrin", by="Pratiqué par", pending_team="Le cabinet n’a pas encore précisé qui consulte à Nyon ni les soins qui y sont pris en charge. [ÉQUIPE DE NYON À CONFIRMER]",
+        cabinets_h="Nos cabinets dentaires, à Meyrin et à Nyon", cabinets_lead="Deux adresses, une seule façon de travailler. Choisissez le cabinet le plus proche de chez vous : la prise de rendez-vous et le téléphone sont communs aux deux.",
         cmp_h="Les deux cabinets en un coup d’œil", cmp_note="Les champs entre crochets seront remplis dès que le cabinet aura confirmé les informations de Nyon. Rien n’est rempli au jugé.",
         cmp_rows=[("Adresse", "address"), ("Localité", "zip_city"), ("Accès", "floor"), ("Horaires", "hours"), ("Téléphone", "phone"), ("Arrêt", "stop"), ("Lignes", "bus"), ("Stationnement", "parking")],
-        loc_of="Le cabinet de", come="Venir au cabinet", who_at="Qui vous reçoit à", spaces="Les espaces", know="Ce qu’il faut savoir avant de venir",
+        loc_of="Le cabinet de", loc_h1="Dentiste à", come="Venir au cabinet", who_at="Qui vous reçoit à", spaces="Les espaces", know="Ce qu’il faut savoir avant de venir",
         facts=[("Adresse", "address"), ("Accès", "floor"), ("Horaires", "hours"), ("Téléphone", "phone"), ("Courriel", "mail"), ("Transports", "transport"), ("Voiture", "parking")],
         f_access="Accès", f_diag="Diagnostic", f_diag_p="Le praticien examine d’abord, puis propose une radiographie seulement lorsqu’elle apporte une information que l’examen seul ne donne pas. La raison de l’examen vous est expliquée.",
         f_hyg="Hygiène", f_equip="Équipement", f_langs="Langues", f_langs_p="Français, anglais, allemand, italien, espagnol et portugais, selon la personne qui vous reçoit.", f_stop="Arrêt",
-        urg_h="Une douleur qui ne peut pas attendre", urg_lead="Appelez le cabinet et décrivez ce qui se passe, depuis quand et comment cela évolue. L’équipe vous dit quand venir. Le degré d’urgence ne se détermine pas depuis une page web.",
+        urg_h="Urgence dentaire à Meyrin, que faire", urg_lead="Appelez le cabinet et décrivez ce qui se passe, depuis quand et comment cela évolue. L’équipe vous dit quand venir. Le degré d’urgence se détermine au téléphone puis à l’examen, jamais depuis une page web.",
         urg_open="Pendant les heures d’ouverture", urg_when="Quand appeler", urg_wait="En attendant le rendez-vous", urg_vital="Urgence vitale", urg_after="En dehors des heures d’ouverture",
         urg_how="Comment se déroule une consultation urgente", urg_how_p1="Le médecin-dentiste commence par identifier la source probable du problème et vérifier les tissus concernés. Le premier objectif peut être de soulager, de stabiliser la situation ou de protéger la dent. Si un traitement complémentaire est nécessaire, les options et la suite sont expliquées avant de continuer.",
         urg_how_p2="Une urgence ne conduit donc pas toujours à un traitement complet le jour même. La conduite dépend de l’examen et de ce qui peut être fait dans de bonnes conditions.", urg_link="La page du soin détaille ce qui est vérifié.",
-        contact_h="Nous contacter", contact_lead="Pour un rendez-vous, l’agenda en ligne et le téléphone sont les plus rapides. Le formulaire sert aux questions qui peuvent attendre une réponse par courriel.",
+        contact_h="Contacter le cabinet dentaire de Meyrin", contact_lead="Pour un rendez-vous, l’agenda en ligne et le téléphone sont les plus rapides. Le formulaire sert aux questions qui peuvent attendre une réponse par courriel.",
         write_h="Écrire au cabinet", write_p="Pas de formulaire pour une urgence : appelez le {phone}. Ne décrivez pas ici votre état de santé, cela se fait au cabinet.",
         f_name="Prénom et nom", f_email="Adresse e-mail", f_phone="Téléphone", f_cab="Cabinet", f_any="Indifférent", f_reason="Motif de votre demande",
         f_reasons=["Question sur un rendez-vous", "Question sur un soin", "Documents ou facture", "Autre"], f_msg="Message", f_send="Envoyer le message", f_ok="Merci, votre message est prêt à partir depuis votre messagerie.",
@@ -104,18 +126,23 @@ S = {
         f_send_note="L’envoi par courriel passe par votre messagerie et n’est pas chiffré de bout en bout. Pour les informations de santé, préférez l’impression ou l’envoi depuis une messagerie de confiance, ou remettez le formulaire à l’accueil.",
         f_sig="Signature", f_sig_hint="Tapez votre nom pour signer.", f_date="Date", f_recap="Vérifiez vos réponses", f_empty="Non renseigné", f_saved="Brouillon enregistré sur cet appareil.",
         f_required="Ce champ est nécessaire.", f_email_bad="Cette adresse ne semble pas valide.", f_step="Étape", f_of="sur",
+        p_title="{n}, {r} à Meyrin", p_desc="{n}, {r} au cabinet dentaire de Meyrin, Place de la Diversité 1. {s}",
+        p_more="Domaines : {a}.", p_book="Prise de rendez-vous en ligne ou au 022 320 19 19.",
+        legal_title="Informations légales et protection des données",
+        legal_meta="Éditeur, responsable de publication, hébergement, protection des données et crédits photographiques du site du cabinet dentaire de Meyrin.",
+        nf_meta="L’adresse a peut-être changé. Les soins dentaires, l’équipe, les cabinets de Meyrin et de Nyon et le contact restent accessibles depuis le menu.",
         publisher="Éditeur du site", pub_manager="Responsable de la publication", hosting="Hébergement", data="Données personnelles", credits="Crédits photographiques",
         credits_p="Photographies du cabinet et portraits : Cabinet Dentaire Meyrin. Photographies d’illustration : Unsplash.",
     ),
     "en": dict(
         nav_all="All treatments", nav_cabs="Both practices", contact_loc="Contact the practice in", form_loc="Form for this practice",
-        about_k="The practice", about_h="A practice that explains before it acts", about_p="General dentistry, oral surgery, implantology and dental hygiene, brought together in one team. Every treatment comes after an examination, is explained in plain words, and is decided by the person in the chair.",
+        about_k="The dental practice", about_h="One team for the whole range of care", about_p="General dentistry, oral surgery, implantology and dental hygiene, brought together in one team. Every treatment follows an examination, is explained in plain words, and is decided with the person sitting in the chair.",
         about_team="The team in brief", about_diff="What sets us apart", about_more="Meet the team",
-        team_home_label="The team", team_home_h="We are here to welcome you", team_home_p="Two dentists, an oral surgeon, a dental hygienist and two assistants. A stable team, the same faces from one appointment to the next.", team_home_more="Meet the whole team",
+        team_home_label="The team", team_home_h="The dentists who will see you", team_home_p="Two dentists, an oral surgeon, a dental hygienist and two assistants. A stable team, the same faces from one appointment to the next.", team_home_more="Meet the whole team",
         hero_people="Victor and Edouard welcome you",
-        soins_home_h="Our treatments", soins_home_p="Each family of treatments has its section below, with the list of what we provide. Each treatment then has its own page, with how it unfolds, frequent questions and practical details.",
-        all_of="See the family", blog_h="The blog", blog_p="Articles to understand dental care before you come, without jargon and without promises.", blog_all="All articles", blog_read="Read the article",
-        blog_lead="What we explain at the chair, written to be read at home: prevention, wisdom teeth, whitening, children. Articles will be added as your questions come in.",
+        soins_home_h="Our dental treatments, from check-up to implant", soins_home_p="Four families of treatments, each with the list of what we provide in Meyrin. Every treatment then has its own page: what the practitioner checks, how it unfolds, frequent questions and practical details.",
+        all_of="See the family", blog_h="Understanding dental care", blog_p="Articles to understand a treatment before you come, without jargon and without promises of a result.", blog_all="All articles", blog_read="Read the article",
+        blog_lead="What we explain at the chair, written to be read at home: prevention, wisdom teeth, whitening, children's care. Articles will be added as your questions come in.",
         cab_soins="Treatments provided in", cab_contact="Contact the practice in", cab_contact_p="By phone during opening hours, by email for what can wait, or online to book.",
         f_cab_opt="Practice (optional)", f_cab_none="I do not know yet",
         lang="en", other="fr", other_label="Français", book="Book an appointment", book_online="Book online", call="Call the practice", call_n="Call",
@@ -124,38 +151,38 @@ S = {
         quick="Quick actions", call_short="Call", choose="Choose a practice", form="Patient form", emergency="Emergencies", see_loc="See the practice in",
         home="Home", crumbs="Breadcrumb", who_cares="Who provides this treatment", who_cares_pl="Who provides these treatments", same_family="In the same family",
         others="The other treatment families", faq="Frequently asked questions", team_intro="Two dentists, an oral surgeon, a dental hygienist and two assistants. Each profile says what the person does and in which languages.",
-        team_h="The people who receive you", team_lead="Two dentists, an oral surgeon, a dental hygienist and two assistants. You do not have to choose yourself: say what the appointment is for and the team directs you to the person who provides that care.",
+        team_h="The team at the Meyrin dental practice", team_lead="Two dentists, an oral surgeon, a dental hygienist and two assistants, between them speaking French, English, German, Italian, Spanish and Portuguese. You do not have to choose yourself: say what the appointment is for and the team directs you to the person who provides that care.",
         areas="Areas", langs="Languages", practice="Practice", cares_of="Treatments provided", source="Source: the practice's official presentation, updated on",
-        visit_h="What happens at a first appointment", visit_lead="Many people put off an appointment because they do not know what to expect. Here is the visit, step by step, from booking to decision. Nothing is decided for you.",
+        visit_h="A first appointment at the dentist", visit_lead="Many people put off an appointment because they do not know what to expect. Here is the consultation step by step, from booking to the written estimate. Nothing is decided for you.",
         bring="What to bring", bring_items=["An identity document", "The list of your medicines, if you take any", "Your recent X-rays, if you have some", "The name of your supplementary dental insurance, if you hold one"],
         bring_note="If you have none of these, come anyway.", fill_form="Save time at reception: fill in the patient form online, at your own pace.",
         calm="You can ask for a pause, an explanation or time to think at any moment.", calm_p="A worry can be mentioned on the phone or on arrival, with no need to justify it. The appointment goes at your pace, and a first check-up can very well end with no treatment at all.",
         all_steps="All the steps, from booking to estimate", meet="Meet the team",
-        hero_kicker="Dental practice, Meyrin and Nyon", hero_a="The practice that takes its time", hero_b="The practice that takes its time",
-        hero_lead="Check-ups, hygiene, cavities, implants, or cosmetic dentistry: one team looks after you, across our two practices. We always start by looking and explaining, then you decide what comes next.",
+        hero_kicker="Dental practice in Meyrin, canton of Geneva, and Nyon", hero_a="The practice that takes its time", hero_b="The practice that takes its time",
+        hero_lead="An appointment starts with a conversation, not with treatment. We examine, we explain what we see, and you decide afterwards. Six people look after you, in Meyrin, in the canton of Geneva, and in Nyon.",
         hero_alt="Victor Palmen and Edouard Di Donna, the practice's two doctors",
-        locs_h="Two practices, one team", locs_p="Choose the practice closest to you. Each practice has its own page with its address, hours, access and team.",
+        locs_h="Two dental practices, one team", locs_p="Choose the practice closest to you. Each page gives the address, the opening hours, how to get there and who consults on site.",
         illus="Illustration photo", philo="We start by looking, understanding and explaining. Treatment comes next.",
         philo_p="This way of working comes down to three habits: examine before proposing, explain before acting, and leave the decision to the person in the chair. It applies to a check-up as much as to an implant.",
         soins_h="Treatments, organised around your need", soins_p="Four families rather than a list of specialities. Each page says what the practitioner checks, how the treatment unfolds and what you will be able to decide after the examination.",
-        cont_h="One team covers the whole range", cont_p="From the yearly check-up to implant placement, treatments are carried out by the practice team whenever possible. You are not sent to a second address mid-treatment, and the person who examined you knows what was done.",
-        trust_h="What you can expect from the practice", close_h="Need an appointment?", close_p="Book online at any hour or call during opening hours. You do not need to know the name of the treatment, just say what brings you.",
+        cont_h="One team, from the check-up to the implant", cont_p="From the yearly check-up to implant placement, treatments are carried out by the practice team whenever possible. You are not referred to a second address mid-treatment, and the person who examined you knows what was done.",
+        trust_h="What you can expect from the practice", close_h="Book an appointment in Meyrin or Nyon", close_p="Book in the online diary at any hour, or call during opening hours. You do not need to know the name of the treatment, just say what brings you.",
         close_care_h="Do you have a question about this treatment?", close_care_p="The appointment is there to examine your situation and explain what is possible. You decide afterwards.",
         close_person_h="Book an appointment", close_person_p="When booking, just tell us what brings you. The team directs you to the person who provides that care.",
-        soins_lead="Each page says what the practitioner checks, how the treatment unfolds and what you will be able to decide after the examination. You do not need to know the name of the treatment to book.",
-        soins_title="Treatments, explained before they are decided", by="Provided by", pending_team="The practice has not yet said who consults in Nyon nor which treatments are offered there. [NYON TEAM TO BE CONFIRMED]",
-        cabinets_h="Our practices", cabinets_lead="Two addresses, one way of working. Choose the closest practice, booking and the phone number are shared.",
+        soins_lead="Four families of treatments rather than a list of specialities, because you arrive with a need and not with a diagnosis. Each page says what the practitioner checks, how the treatment unfolds and what you will be able to decide after the examination. You do not need to know the name of the treatment to book.",
+        soins_title="Dental treatments provided in Meyrin", by="Provided by", pending_team="The practice has not yet said who consults in Nyon nor which treatments are offered there. [NYON TEAM TO BE CONFIRMED]",
+        cabinets_h="Our dental practices in Meyrin and Nyon", cabinets_lead="Two addresses, one way of working. Choose the practice closest to you: booking and the phone number are shared between them.",
         cmp_h="The two practices at a glance", cmp_note="Bracketed fields will be filled in as soon as the practice confirms the Nyon details. Nothing is guessed.",
         cmp_rows=[("Address", "address"), ("Town", "zip_city"), ("Access", "floor"), ("Hours", "hours"), ("Phone", "phone"), ("Stop", "stop"), ("Lines", "bus"), ("Parking", "parking")],
-        loc_of="The practice in", come="Getting there", who_at="Who receives you in", spaces="The rooms", know="What to know before you come",
+        loc_of="The practice in", loc_h1="English-speaking dentist in", come="Getting there", who_at="Who receives you in", spaces="The rooms", know="What to know before you come",
         facts=[("Address", "address"), ("Access", "floor"), ("Hours", "hours"), ("Phone", "phone"), ("Email", "mail"), ("Public transport", "transport"), ("By car", "parking")],
         f_access="Access", f_diag="Diagnosis", f_diag_p="The practitioner examines first, then suggests an X-ray only when it adds information the examination alone does not give. The reason for the examination is explained to you.",
         f_hyg="Hygiene", f_equip="Equipment", f_langs="Languages", f_langs_p="French, English, German, Italian, Spanish and Portuguese, depending on who receives you.", f_stop="Stop",
-        urg_h="Pain that cannot wait", urg_lead="Call the practice and describe what is happening, since when and how it is evolving. The team tells you when to come. The degree of urgency cannot be determined from a web page.",
+        urg_h="Dental emergency in Meyrin, what to do", urg_lead="Call the practice and describe what is happening, since when and how it is evolving. The team tells you when to come. How urgent it is gets decided on the phone and then at the examination, never from a web page.",
         urg_open="During opening hours", urg_when="When to call", urg_wait="While waiting for the appointment", urg_vital="Life-threatening emergency", urg_after="Outside opening hours",
         urg_how="How an emergency consultation goes", urg_how_p1="The dentist starts by identifying the likely source of the problem and checking the tissues concerned. The first aim may be to relieve, stabilise the situation or protect the tooth. If further treatment is needed, the options and next steps are explained before continuing.",
         urg_how_p2="An emergency therefore does not always lead to a complete treatment the same day. What is done depends on the examination and on what can be done in good conditions.", urg_link="The treatment page details what is checked.",
-        contact_h="Get in touch", contact_lead="For an appointment, the online diary and the phone are the quickest. The form is for questions that can wait for an answer by email.",
+        contact_h="Contact the Meyrin dental practice", contact_lead="For an appointment, the online diary and the phone are the quickest. The form is for questions that can wait for an answer by email.",
         write_h="Write to the practice", write_p="No form for an emergency: call {phone}. Do not describe your health here, that is done at the practice.",
         f_name="First and last name", f_email="Email address", f_phone="Phone", f_cab="Practice", f_any="Either", f_reason="Reason for your request",
         f_reasons=["Question about an appointment", "Question about a treatment", "Documents or invoice", "Other"], f_msg="Message", f_send="Send the message", f_ok="Thank you, your message is ready to send from your email app.",
@@ -179,6 +206,11 @@ S = {
         f_send_note="Sending by email goes through your own email app and is not end-to-end encrypted. For health details, prefer printing, a trusted email service, or handing the form in at reception.",
         f_sig="Signature", f_sig_hint="Type your name to sign.", f_date="Date", f_recap="Check your answers", f_empty="Not provided", f_saved="Draft saved on this device.",
         f_required="This field is needed.", f_email_bad="This address does not look valid.", f_step="Step", f_of="of",
+        p_title="{n}, {r} in Meyrin", p_desc="{n}, {r} at the dental practice in Meyrin, Place de la Diversité 1. {s}",
+        p_more="Areas: {a}.", p_book="Book online or call 022 320 19 19.",
+        legal_title="Legal notice and data protection",
+        legal_meta="Publisher, person responsible, hosting, data protection and photo credits for the website of the Meyrin dental practice, Place de la Diversité 1.",
+        nf_meta="The address may have changed. Dental treatments, the team, the Meyrin and Nyon practices and contact details are all reachable from the menu.",
         publisher="Site publisher", pub_manager="Publishing manager", hosting="Hosting", data="Personal data", credits="Photo credits",
         credits_p="Practice photographs and portraits: Cabinet Dentaire Meyrin. Illustration photographs: Unsplash.",
     ),
@@ -649,7 +681,7 @@ def render_lang(theme_key, lang, C, T, picture, head, write):
     <div><dt>{T['f_langs']}</dt><dd>{T['f_langs_p']}</dd></div>
   </dl></div></section>"""
             mapblock = f'<div class="map-sec" aria-label="{T["map"]}"><div class="wrap"><div class="map"><iframe title="{T["map"]}, {L["name"]}" src="{L["embed"]}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div></div></div>' if L["embed"] else ""
-            return phero(T, C, f"{T['loc_of']} {L['name']}", L["short"], [(T["home"], px + "/"), (practices_label, px + "/cabinets/"), (L["name"], None)],
+            return phero(T, C, f"{T['loc_h1']} {L['name']}", L["short"], [(T["home"], px + "/"), (practices_label, px + "/cabinets/"), (L["name"], None)],
                          picture(L["img"], L["alt"], "(max-width: 900px) 100vw, 40vw", eager=True)) + f"""
 <section class="loc-facts" aria-label="{T['know']}">
   <div class="wrap loc-facts-in">
@@ -699,14 +731,14 @@ def render_lang(theme_key, lang, C, T, picture, head, write):
             cares = "".join(f'<li class="care-row"><a href="{px}/soins/{c}/"><h2>{C.care(c)["name"]}</h2><p>{C.care(c)["h1"]}</p><span class="muted">{C.care(c)["desc"]}</span></a></li>' for c in f["cares"])
             who = "".join(portrait(C.P[w], "(max-width: 700px) 45vw, 150px") for w in f["who"])
             others = "".join(f'<li><a href="{px}/soins/{o["slug"]}/">{o["name"]}</a><span>{o["line"]}</span></li>' for o in C.FAMILIES if o is not f)
-            return phero(T, C, f["name"], f["intro"], [(T["home"], px + "/"), (C.NAV[1][0], px + "/soins/"), (f["name"], None)],
+            return phero(T, C, f["h1"], f["intro"], [(T["home"], px + "/"), (C.NAV[1][0], px + "/soins/"), (f["name"], None)],
                          picture(f["img"], f["alt"], "(max-width: 900px) 100vw, 36vw", eager=True)) + f"""
 <section class="care-sec" aria-label="{f['name']}">
   <div class="wrap care-sec-in"><ul class="care-rows">{cares}</ul>
     <aside class="side"><h2 class="side-h">{T['who_cares_pl']}</h2><ul class="portraits portraits-side">{who}</ul><a class="btn" href="{C.BOOKING}" target="_blank" rel="noopener">{T['book']}</a></aside></div>
 </section>
 <section class="others band-tint" aria-labelledby="others-h"><div class="wrap"><h2 id="others-h">{T['others']}</h2><ul class="others-list">{others}</ul></div></section>"""
-        page(f"/soins/{f['slug']}/", f"{f['name']} | Cabinet Dentaire", f["line"] + " " + f["intro"][:120], "/soins/", fam_page,
+        page(f"/soins/{f['slug']}/", f["seo_title"], f["seo_desc"], "/soins/", fam_page,
              [{"@context": "https://schema.org", "@type": "CollectionPage", "name": f["name"], "url": base + f"/soins/{f['slug']}/", "inLanguage": T["lang"]}], f["img"], closing_args=())
 
     for c in C.ALL_CARES:
@@ -767,7 +799,7 @@ def render_lang(theme_key, lang, C, T, picture, head, write):
     </div>
   </div>
 </header>"""
-        page(f"/equipe/{p['slug']}/", f"{p['name']}, {p['role'].lower()}", p["short"] + " " + p["areas"], "/equipe/", person,
+        page(f"/equipe/{p['slug']}/", suffix(T["p_title"].format(n=p["name"], r=p["role"].lower())), fit(T["p_desc"].format(n=p["name"], r=p["role"].lower(), s=p["short"]), T["p_more"].format(a=p["areas"].lower()), T["p_book"]), "/equipe/", person,
              [{"@context": "https://schema.org", "@type": "Person", "name": p["name"], "jobTitle": p["role"], "worksFor": {"@type": "Dentist", "name": FR.NAME}, "url": base + f"/equipe/{p['slug']}/"}],
              closing_args=(T["close_person_h"], T["close_person_p"]))
 
@@ -860,7 +892,7 @@ def render_lang(theme_key, lang, C, T, picture, head, write):
     <aside class="side"><h2 class="side-h">{T['blog_all']}</h2><ul class="side-links">{others}</ul><a class="btn" href="{C.BOOKING}" target="_blank" rel="noopener">{T['book']}</a></aside>
   </div>
 </section>"""
-        page(f"/blog/{b['slug']}/", b["title"] + " | Cabinet Dentaire", b["desc"], "/blog/", post,
+        page(f"/blog/{b['slug']}/", suffix(b["title"]), b["desc"], "/blog/", post,
              [{"@context": "https://schema.org", "@type": "Article", "headline": b["title"], "datePublished": b["date"], "inLanguage": T["lang"], "author": {"@type": "Organization", "name": FR.NAME}, "url": base + f"/blog/{b['slug']}/"}], b["img"], closing_args=())
 
     # ---------------------------------------------------------- legal, 404
@@ -873,11 +905,11 @@ def render_lang(theme_key, lang, C, T, picture, head, write):
 <h2>{T['data']}</h2><p>{T['f_consent_note']}</p>
 <h2>{T['credits']}</h2><p>{T['credits_p']}</p>
 </div></section>"""
-    page("/mentions-legales/", T["legal"] + " | Cabinet Dentaire", T["legal_p"], "", legal)
+    page("/mentions-legales/", suffix(T["legal_title"]), T["legal_meta"], "", legal)
 
     def nf():
         return phero(T, C, T["nf"], T["nf_p"], [(T["home"], px + "/"), (T["nf"], None)])
-    page("/404.html", T["nf"] + " | Cabinet Dentaire", T["nf_p"], "", nf)
+    page("/404.html", suffix(T["nf"]), T["nf_meta"], "", nf)
 
     out_dir = HERE.parent / "dist" / px.strip("/")
     out_dir.mkdir(parents=True, exist_ok=True)
