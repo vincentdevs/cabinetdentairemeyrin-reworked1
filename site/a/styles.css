@@ -1332,3 +1332,18 @@ html { scroll-behavior: auto; }
    Le trait du menu mobile, qui devient une croix, et la flèche des questions
    fréquentes, qui pivote quand le panneau s'ouvre. Les deux disent un
    changement d'état, ils ne décorent rien. */
+
+/* --- square photo corners, version A ---
+   Photographs sit on a sharp corner. --r-pic is shared with panels here, so it
+   is left alone and only the image containers are overridden: the side rail,
+   the emergency phone block and the hero float keep their rounded corners.
+   Circular portraits keep their 50% radius, since a circle is not a corner. */
+.hero-art picture, .mask picture,
+.hero-pic, .hero-pic picture,
+.phero-pic, .phero-banner-pic,
+.loc-pic, .fam-pic, .visite-pic, .philo-pic,
+.gallery picture, .post picture,
+.soin-visual picture,
+.team-pic picture, .person picture, .profile-pic,
+.video-slot,
+.map, .map iframe { border-radius: 0; }
