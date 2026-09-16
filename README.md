@@ -91,5 +91,5 @@ mêmes routes et des liens `hreflang` croisés.
 Les informations que le cabinet n'a pas fournies portent un marqueur entre
 crochets dans les pages, par exemple `[ADRESSE À CONFIRMER]`. Elles ne sont
 jamais inventées. La liste complète, avec les prix, l'adresse de Nyon et les
-titres et diplômes de l'équipe, vit dans le dépôt de la version élégante, sous
-`key-information/`.
+titres et diplômes de l'équipe, vit dans le dépôt `cabinetdentairemeyrin-b`,
+sous `key-information/`, avec en regard l'inventaire de tout le texte du site.
