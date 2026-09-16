@@ -67,3 +67,45 @@ commentées. Les décisions qui comptent :
 - L'index de clôture reprend les 19 soins. Si la liste dépasse la trentaine, il
   faudra le passer en deux colonnes par famille plutôt qu'en trois colonnes
   continues.
+
+
+## Passe sobre, même séance
+
+Demande : retirer les animations au défilement et rendre l'interface plus
+minimale. Ce qui a été enlevé, et ce qui reste.
+
+### Retiré du JavaScript
+
+- Le système de révélation entier : l'`IntersectionObserver`, les classes `.r`
+  et `.in` posées au défilement, et le filet de sécurité qui rattrapait les
+  blocs oubliés. Sans révélation, il n'y a plus rien à rattraper.
+- L'écouteur de défilement qui posait `.scrolled` sur l'en-tête.
+- Le défilement animé vers l'étape suivante du formulaire patient, devenu
+  instantané.
+
+Il reste dans `script.js` ce qui rend le site utilisable : menu mobile, menus
+déroulants, recherche, mémoire du cabinet choisi, et les six étapes du
+formulaire patient avec la validation du numéro AVS.
+
+### Retiré de la feuille de style
+
+- `scroll-behavior: smooth` sur `html`.
+- Les états `.js .r` et `.js .mask`, neutralisés en opacité 1, sans transform
+  ni `clip-path`.
+- Tous les zooms d'image au survol, sur les cartes de cabinet, les articles et
+  les moitiés d'écran.
+- Les blocs qui se soulevaient de 2 ou 3 px au survol.
+- Le filet du lien qui se traçait, remplacé par un filet permanent qui passe
+  de 45 % à 100 % d'opacité, et le remplissage du bouton qui montait par le
+  bas, remplacé par le changement de fond.
+- Le glissement de 4 px du nom d'un soin dans l'index.
+
+### Vérifié après coup
+
+- Aucun élément laissé invisible ou déplacé sur l'accueil, les soins,
+  l'équipe, le blog et le formulaire, à 1440 et 390 px. Les seules opacités
+  inférieures à 1 qui subsistent sont voulues : les radios personnalisées du
+  formulaire, masquées derrière leur étiquette, et la légende vidéo à 85 et
+  90 % sur son panneau foncé.
+- Gate `check-layout.mjs` : 13 pages à 1440, 768 et 390 px, aucun signalement.
+- Aucun défilement horizontal à 390 px.

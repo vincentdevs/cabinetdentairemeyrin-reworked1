@@ -1249,3 +1249,86 @@ body::after {
   .js .mask img, .js .hero-art img { transform: none !important; }
   .btn::before, .link::after, .care-list a::after { transition: none; }
 }
+
+/* ==========================================================================
+   REWORKED 1, PASSE SOBRE
+   La couche d'animation au défilement est retirée. Le contenu est présent à
+   l'arrivée, l'en-tête garde le même filet du haut jusqu'au bas de la page, et
+   plus rien ne se déplace au survol. Ce qui répond au curseur répond par la
+   couleur ou par un filet, jamais par un mouvement de bloc. Les seules
+   transitions qui restent servent à dire qu'un élément est cliquable ou
+   qu'un panneau est ouvert.
+   ========================================================================== */
+
+/* --- 1. plus de saut de défilement -------------------------------------- */
+html { scroll-behavior: auto; }
+
+/* --- 2. le contenu ne se révèle plus, il est là ------------------------- */
+.js .r,
+.js .r.in,
+.js .mask picture,
+.js .mask.in picture,
+.js .mask img,
+.js .mask.in img,
+.js .hero-art img,
+.js .hero-art.in img {
+  opacity: 1;
+  transform: none;
+  clip-path: none;
+  transition: none;
+}
+
+/* --- 3. l'en-tête ne réagit plus au défilement --------------------------
+   Le filet est permanent, donc il n'y a plus rien à basculer. */
+.top,
+.top.scrolled {
+  background: rgba(250, 249, 246, .94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--hair);
+  transition: none;
+}
+
+/* --- 4. plus aucun zoom d'image au survol ------------------------------- */
+.hero-pic img,
+.loc-pic img,
+.loc-pic:hover img,
+.loc-link:hover img,
+.half img,
+.half:hover img,
+.post img,
+.post a:hover img {
+  transform: none;
+  transition: none;
+}
+
+/* --- 5. plus aucun bloc qui se soulève ---------------------------------- */
+.loc,
+.post a,
+.thc a,
+.quick-list a {
+  transition: border-color var(--t), color var(--t);
+}
+.post a:hover,
+.thc a:hover,
+.quick-list a:hover {
+  transform: none;
+}
+
+/* --- 6. le survol se dit par la couleur --------------------------------
+   Le lien garde son filet, qui change d'intensité au lieu de se tracer. Le
+   bouton change de fond, sans remplissage qui monte. Le nom d'un soin ne
+   glisse plus, seul le filet de sa ligne et sa couleur bougent. */
+.link::after { display: none; }
+.link::before { opacity: .45; transition: opacity var(--t); }
+.link:hover::before { opacity: 1; }
+
+.btn::before { display: none; }
+.btn { overflow: visible; transition: background var(--t), color var(--t), border-color var(--t); }
+
+.care-list a .cl-n,
+.care-list a:hover .cl-n { transform: none; transition: color var(--t); }
+
+/* --- 7. ce qui garde une transition, et pourquoi -----------------------
+   Le trait du menu mobile, qui devient une croix, et la flèche des questions
+   fréquentes, qui pivote quand le panneau s'ouvre. Les deux disent un
+   changement d'état, ils ne décorent rien. */

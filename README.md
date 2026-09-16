@@ -23,15 +23,19 @@ Ce qui les remplace ne se dessine pas, cela se construit :
   numéro en chiffres tabulaires sur leur propre filet, comme un numéro de
   chapitre.
 - **Une liste de soins devenue index.** Les mêmes lignes qu'avant, désormais
-  numérotées, le nom qui avance de 4 px et le filet qui passe au pétrole sous
+  numérotées, le numéro, le nom et le filet de la ligne passant au pétrole sous
   le curseur. Les chiffres viennent d'un compteur CSS, le balisage n'a pas
   bougé.
 - **La photographie tenue dans un filet.** Un trait d'un pixel dessiné à
-  l'intérieur du bord sépare l'image de la page sans l'encadrer, et l'image se
-  pose en fin de révélation au lieu d'être balayée.
-- **Le mouvement porte sur des lignes.** Le lien garde un filet discret et un
-  second filet se trace par-dessus à l'entrée du curseur, le bouton se remplit
-  par le bas, l'en-tête gagne un flou et un filet au défilement.
+  l'intérieur du bord sépare l'image de la page sans l'encadrer. L'image est
+  posée telle quelle, sans balayage ni mise à l'échelle.
+- **Aucune animation au défilement.** Le contenu est présent à l'arrivée, rien
+  n'apparaît en fondu, aucune image ne se met à l'échelle, l'en-tête garde le
+  même filet du haut jusqu'au bas de la page. Le survol répond par la couleur,
+  le nom d'un soin et le filet de sa ligne passent au pétrole, et rien ne se
+  déplace. Les deux seules transitions qui restent disent un changement
+  d'état : le trait du menu mobile qui devient une croix, et la flèche des
+  questions fréquentes qui pivote.
 - **Un index de tous les soins** ferme la page d'accueil : les 19 soins en
   trois colonnes, numérotés, sur filets. Un lecteur qui ne connaît pas le nom
   de ce qu'il cherche voit toute l'offre d'un coup.
@@ -78,7 +82,7 @@ mêmes routes et des liens `hreflang` croisés.
 | `site/content/` | les sources de contenu et les articles |
 | `site/render.py` | la composition de chaque type de page |
 | `site/a/styles.css` | la feuille de style, le bloc `REWORKED 1` en fin de fichier |
-| `site/shared/script.js` | menu, recherche, révélations, formulaire patient |
+| `site/shared/script.js` | menu, menus déroulants, recherche, formulaire patient |
 | `site/assets/` | polices, photographies, portraits |
 | `site/tools/` | traitement des images et rebase pour GitHub Pages |
 
