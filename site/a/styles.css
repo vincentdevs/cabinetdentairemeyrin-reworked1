@@ -1353,11 +1353,11 @@ html { scroll-behavior: auto; }
    about 516px wide and 645px tall instead of 423 square, so a fifth wider, a
    half taller and close to double the area. A wider split was tried and the
    English headline broke onto three lines at 1440px, which is why it stops
-   here. The content also starts at the top of the hero
-   rather than floating in the middle of it, so the picture occupies the upper
-   band that used to sit empty under the header. */
+   here. The picture alone is pinned to the top of the hero so it fills the band
+   that used to sit empty under the header, while the headline and its lead
+   stay vertically centred where they were. */
 @media (min-width: 901px) {
-  .hero-full .hero-in { grid-template-columns: 5.9fr 6.1fr; align-items: start; padding-block: 24px 56px; }
+  .hero-full .hero-in { grid-template-columns: 5.9fr 6.1fr; align-items: center; padding-block: 48px 56px; }
+  .hero-art { align-self: start; }
   .hero-art picture { aspect-ratio: 4 / 5; max-height: calc(100vh - 150px); }
-  .hero-full .hero-head { padding-top: 8px; }
 }
