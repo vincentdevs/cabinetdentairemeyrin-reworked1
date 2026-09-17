@@ -1366,3 +1366,44 @@ html { scroll-behavior: auto; }
   .hero-art { align-self: start; }
   .hero-art picture { aspect-ratio: 16 / 17; max-height: calc(100vh - 150px); }
 }
+
+/* --- horizontal overflow guard, all widths -------------------------------
+   Grid and flex children default to min-width: auto, so one item whose
+   intrinsic minimum is wide, the video placeholder measured 943px, pushes its
+   whole track past the viewport and the page scrolls sideways. Every track
+   that must be free to shrink is declared minmax(0, ...) and every child that
+   only holds content is allowed to go to zero. This used to be scoped to
+   phones, which is why the defect survived between 768 and 1440px. */
+.care-sec-in, .article-in { grid-template-columns: minmax(0, 1fr) 340px; }
+.care-sec-in > *, .article-in > *, .hfam-in > *, .wrap > *,
+.prose > *, .side > *, .video-slot, .video-slot > *,
+.vsteps-in > *, .loc-facts-in > *, .urg-in > *, .vital-in > *,
+.ccols > *, .form-in > *, .faq-in > * { min-width: 0; }
+.video-slot picture, .video-slot img { max-width: 100%; }
+@media (max-width: 900px) {
+  .care-sec-in, .article-in { grid-template-columns: minmax(0, 1fr); }
+}
+/* The desktop bar needs about 1100px before the nav and the action group stop
+   fitting side by side, so the burger takes over there rather than at 900. */
+@media (max-width: 1100px) {
+  .nav, .top-cta { display: none; }
+  .burger { display: block; }
+}
+
+/* --- team page portraits ---------------------------------------------------
+   The flat strip at the top of /equipe/ showed the six cut-outs unaligned on a
+   white ground. It is replaced by the same circular portraits the home page
+   uses, at the same size and on the same tint, and the portraits in the rows
+   below become circles too so the page is consistent with itself. The banner
+   slot drops its fixed ratio and its clipping, which would have cropped the
+   circles. */
+.phero-team .phero-banner-pic { aspect-ratio: auto; overflow: visible; border-radius: 0; }
+.team-pic .disc { aspect-ratio: 1 / 1; border-radius: 50%; background: var(--mist); }
+.team-pic .disc picture, .team-pic .disc img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; }
+
+/* The side rail is a fixed 340px, so its portrait grid must never be told to
+   hold more columns than fit: two tracks that can shrink to zero, at every
+   width. The dock is the phone action bar and its items shrink the same way. */
+.portraits-side { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.portraits > li, .portraits-side > li, .person, .dock > *, .dock a { min-width: 0; }
+.dock { max-width: 100%; }

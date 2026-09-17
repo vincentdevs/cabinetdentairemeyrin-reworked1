@@ -777,8 +777,13 @@ def render_lang(theme_key, lang, C, T, picture, head, write):
   <div class="team-txt"><h2><a href="{px}/equipe/{p['slug']}/">{p["name"]}</a></h2><p class="team-role">{p["role"]}</p><p>{p["short"]}</p>
     <dl class="team-meta"><div><dt>{T['areas']}</dt><dd>{p["areas"]}</dd></div><div><dt>{T['langs']}</dt><dd>{p["langs"]}</dd></div></dl></div>
 </li>""" for p in C.PEOPLE)
-        team_banner = picture("stock/team-banner.jpg", "L’équipe du cabinet, ensemble" if lang == "fr" else "The practice team, together", "(max-width: 900px) 100vw, 1100px", eager=True)
-        return phero(T, C, T["team_h"], T["team_lead"], [(T["home"], px + "/"), (dict((h, l) for l, h in C.NAV)["/equipe/"], None)], banner=team_banner) + f'<section class="team-sec" aria-label="{dict((h, l) for l, h in C.NAV)["/equipe/"]}"><div class="wrap"><ul class="team-rows">{rows}</ul></div></section>'
+        # the same circular portraits as the home page, rather than a flat strip
+        team_banner = '<ul class="thc-grid">' + "".join(
+            f'<li class="thc"><a href="{px}/equipe/{p["slug"]}/"><span class="thc-pic">'
+            + picture("team/" + p["slug"] + ".png", f'{p["name"]}, {p["role"].lower()}', "(max-width: 700px) 30vw, 16vw", eager=True)
+            + f'</span><span class="thc-txt"><span class="thc-name">{p["name"]}</span><span class="thc-role">{p["role"]}</span></span></a></li>'
+            for p in C.PEOPLE) + "</ul>"
+        return phero(T, C, T["team_h"], T["team_lead"], [(T["home"], px + "/"), (dict((h, l) for l, h in C.NAV)["/equipe/"], None)], banner=team_banner, cls="phero-team") + f'<section class="team-sec" aria-label="{dict((h, l) for l, h in C.NAV)["/equipe/"]}"><div class="wrap"><ul class="team-rows">{rows}</ul></div></section>'
     page("/equipe/", *C.META["equipe"], "/equipe/", team, closing_args=())
 
     for p in C.PEOPLE:
