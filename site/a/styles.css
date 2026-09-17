@@ -1351,13 +1351,18 @@ html { scroll-behavior: auto; }
 /* --- hero photograph enlarged, version A ---
    The picture column takes 6.1fr against 5.9fr, which puts the photograph at
    about 516px wide and 645px tall instead of 423 square, so a fifth wider, a
-   half taller and close to double the area. A wider split was tried and the
+   a third taller and about 60 percent more area. Its height then came down 15
+   percent, from 646 to about 549px, and those 97px went into the band below
+   the hero, which gains a 96px bottom margin. A wider split was tried and the
    English headline broke onto three lines at 1440px, which is why it stops
    here. The picture alone is pinned to the top of the hero so it fills the band
    that used to sit empty under the header, while the headline and its lead
    stay vertically centred where they were. */
 @media (min-width: 901px) {
   .hero-full .hero-in { grid-template-columns: 5.9fr 6.1fr; align-items: center; padding-block: 48px 56px; }
+  /* the freed height sits below the section, not inside the grid, so the
+     centred headline does not drift upward with it */
+  .hero-full { margin-bottom: 96px; }
   .hero-art { align-self: start; }
-  .hero-art picture { aspect-ratio: 4 / 5; max-height: calc(100vh - 150px); }
+  .hero-art picture { aspect-ratio: 16 / 17; max-height: calc(100vh - 150px); }
 }
